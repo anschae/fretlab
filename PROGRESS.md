@@ -19,3 +19,8 @@ Source of truth: [SPEC.md](SPEC.md).
 - The AudioWorklet synth was rendered offline in Chrome: sample-accurate onset and correct pitch from E1 (41 Hz) to E6.
 - Not testable here: how the synth *sounds* to you, Safari/iOS behaviour, and touch feel on a real phone — that's what the feedback round is for.
 - Interval reference songs are in `src/data/interval-hints.json` (editable).
+
+## TODO (from feedback, not yet implemented)
+
+- [ ] Note names: English convention (B, B♭) by default, even when the UI language is German (currently the German UI defaults to German H/B). Adjust `defaultSettings()` in `src/state/settings.ts` and its test.
+- [ ] GitHub Actions: update actions to versions that run on Node 24 (deprecation warning for Node 20).
