@@ -65,8 +65,9 @@ export class ExerciseRunner {
       "button",
       { type: "button", class: "btn ghost", "aria-expanded": "false", onClick: () => this.toggleSettings() },
       "⚙ ",
-      t("runner.settings"),
+      h("span", { class: "btn-label" }, t("runner.settings")),
     );
+    this.settingsBtn.setAttribute("aria-label", t("runner.settings"));
     this.controlsEl.append(this.replayBtn, this.solutionBtn, this.nextBtn);
 
     this.el = h(

@@ -28,6 +28,7 @@ export class AppShell {
   private readonly overlay = h("div", { class: "start-overlay", hidden: true });
   private cleanup: (() => void) | null = null;
   private currentNeedsAudio = false;
+  private overlayMode: "hidden" | "start" | "unsupported" = "hidden";
 
   constructor(
     private readonly root: HTMLElement,
@@ -83,6 +84,9 @@ export class AppShell {
     clear(this.main);
     this.renderHeader(route);
     this.currentNeedsAudio = false;
+    this.overlayMode = "hidden";
+    clear(this.overlay);
+    this.overlay.hidden = true;
     const unsubHeader = this.app.onSettingsChange(() => this.renderHeader(route));
 
     let cleanup: () => void = () => undefined;
@@ -213,29 +217,40 @@ export class AppShell {
     return () => page.remove();
   }
 
+  /**
+   * Shows "Tap to start" while an audio exercise is open and audio is locked.
+   * Re-renders only when its mode changes (re-rendering during the tap would
+   * swallow the click), and when audio becomes available after the overlay
+   * was shown, asks the runner to play the pending question.
+   */
   private updateOverlay(): void {
     const state = this.app.audio.state;
+    const mode: "hidden" | "start" | "unsupported" = !this.currentNeedsAudio
+      ? "hidden"
+      : state === "unsupported"
+        ? "unsupported"
+        : state === "running"
+          ? "hidden"
+          : "start";
+    if (mode === this.overlayMode) return;
+    const wasStart = this.overlayMode === "start";
+    this.overlayMode = mode;
     const t = this.app.t;
-    const show = this.currentNeedsAudio && (state === "locked" || state === "suspended");
     clear(this.overlay);
-    this.overlay.hidden = !show && !(this.currentNeedsAudio && state === "unsupported");
-    if (this.currentNeedsAudio && state === "unsupported") {
+    this.overlay.hidden = mode === "hidden";
+    if (mode === "hidden") {
+      if (wasStart && state === "running") {
+        void this.app.audio.ready().then(() => window.dispatchEvent(new CustomEvent("fretlab:audio-ready")));
+      }
+      return;
+    }
+    if (mode === "unsupported") {
       this.overlay.append(h("div", { class: "start-box" }, h("p", null, t("audio.unsupported"))));
       return;
     }
-    if (!show) return;
     const btn = h(
       "button",
-      {
-        type: "button",
-        class: "btn primary big",
-        onClick: async () => {
-          await this.app.audio.unlock();
-          await this.app.audio.ready();
-          this.updateOverlay();
-          window.dispatchEvent(new CustomEvent("fretlab:audio-ready"));
-        },
-      },
+      { type: "button", class: "btn primary big", onClick: () => void this.app.audio.unlock() },
       "▶ ",
       t("audio.tapToStart"),
     );

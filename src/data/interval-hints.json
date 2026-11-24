@@ -1,0 +1,26 @@
+{
+  "$comment": "Reference songs for interval ear training. Edit freely: keys are interval ids (see src/core/intervals.ts); 'asc' = ascending, 'desc' = descending, 'harmonic' falls back to 'asc'. Each entry may have 'en' and 'de' text; 'de' falls back to 'en'.",
+  "asc": {
+    "m2": { "en": "Jaws theme", "de": "Der weisse Hai (Thema)" },
+    "M2": { "en": "Happy Birthday (“Hap-py BIRTH-”)", "de": "Alle meine Entchen" },
+    "m3": { "en": "Greensleeves", "de": "Greensleeves" },
+    "M3": { "en": "Oh When the Saints", "de": "Oh When the Saints" },
+    "P4": { "en": "Here Comes the Bride", "de": "O Tannenbaum" },
+    "TT": { "en": "Maria (West Side Story) / The Simpsons", "de": "Maria (West Side Story) / Die Simpsons" },
+    "P5": { "en": "Star Wars main theme", "de": "Star Wars (Hauptthema)" },
+    "m6": { "en": "The Entertainer (pick-up to the first beat)", "de": "The Entertainer (Auftakt)" },
+    "M6": { "en": "My Bonnie Lies over the Ocean", "de": "My Bonnie Is over the Ocean" },
+    "m7": { "en": "Star Trek (original series theme)", "de": "Raumschiff Enterprise (Originalserie)" },
+    "M7": { "en": "Take On Me (chorus leap)", "de": "Take On Me (Sprung im Refrain)" },
+    "P8": { "en": "Somewhere Over the Rainbow", "de": "Somewhere Over the Rainbow" }
+  },
+  "desc": {
+    "m2": { "en": "Für Elise", "de": "Für Elise" },
+    "M2": { "en": "Yesterday (The Beatles)", "de": "Yesterday (The Beatles)" },
+    "m3": { "en": "Hey Jude", "de": "Kuckuck, Kuckuck, ruft’s aus dem Wald" },
+    "M3": { "en": "Beethoven’s 5th", "de": "Beethovens 5. Sinfonie" },
+    "P4": { "en": "Eine kleine Nachtmusik (opening)", "de": "Eine kleine Nachtmusik (Anfang)" },
+    "P5": { "en": "The Flintstones", "de": "Die Feuersteins" },
+    "P8": { "en": "Willow Weep for Me", "de": "Willow Weep for Me" }
+  }
+}

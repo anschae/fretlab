@@ -4,6 +4,8 @@ import { h } from "../dom";
 export interface AnswerItem<T> {
   value: T;
   label: string;
+  /** optional second line (e.g. the long interval name) */
+  sub?: string;
   /** shown as a small key hint ("1", "C", "⇧C") */
   keyHint?: string;
   /** key matcher; defaults to none */
@@ -37,6 +39,7 @@ export class AnswerButtons<T> {
         "button",
         { type: "button", class: "answer", "aria-label": item.ariaLabel ?? item.label, onClick: () => this.pick(item.value) },
         h("span", { class: "answer-label" }, item.label),
+        item.sub ? h("span", { class: "answer-sub" }, item.sub) : null,
         item.keyHint ? h("kbd", { "aria-hidden": "true" }, item.keyHint) : null,
         mark,
       );
