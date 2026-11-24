@@ -24,3 +24,5 @@ Source of truth: [SPEC.md](SPEC.md).
 
 - [ ] Note names: English convention (B, B♭) by default, even when the UI language is German (currently the German UI defaults to German H/B). Adjust `defaultSettings()` in `src/state/settings.ts` and its test.
 - [ ] GitHub Actions: update actions to versions that run on Node 24 (deprecation warning for Node 20).
+- [ ] **Show all notes (practice tool):** pick a note → every position of that note is shown on the fretboard (active tuning, global fret range). Implement as a `Tool` (`src/tools/note-finder/`), registered in the registry like an exercise.
+- [ ] **Find all notes (quiz):** the app picks a note, the user must click it *everywhere* on the fretboard. Already exists as mode "Find all" in `fretboard-find-note` (default frets 0–12). To do: make it easier to find (e.g. its own entry on the home page instead of a hidden mode) and consider defaulting to the whole neck.
