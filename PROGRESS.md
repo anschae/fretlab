@@ -8,6 +8,6 @@ Source of truth: [SPEC.md](SPEC.md).
 | 2 | `core/` + unit tests (pitch, intervals, chords, scales, tuning + drop, fretboard, notation EN/DE, RNG) | done — patterns/progressions/rhythm come with their modules |
 | 3 | Audio engine + Karplus-Strong (AudioWorklet, buffer fallback, tuning tests E1–E6) | done |
 | 4 | App shell, settings page, i18n (EN+DE), storage with migrations + backup export/import, registry, ExerciseRunner | done |
-| 5 | Fretboard SVG component | next |
-| 6 | Modules 1, 2a, 2b | |
+| 5 | Fretboard SVG component (any string count, fret range, orientation, left-handed, markers, click + keyboard, labelled marks) | done |
+| 6 | Modules 1, 2a, 2b | next |
 | — | **Stop for feedback** | |

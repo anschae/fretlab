@@ -635,3 +635,200 @@ input[type="number"] {
   width: fit-content;
   max-width: 100%;
 }
+
+/* ------------------------------------------------------------ fretboard */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.fretboard-wrap {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 8px;
+  padding-bottom: 2px;
+}
+.fretboard {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.fretboard .nut {
+  fill: #ece2cc;
+}
+.fretboard .fret-wire {
+  fill: #b9b4ab;
+}
+.fretboard .inlay {
+  fill: #d9cfbd;
+  opacity: 0.85;
+}
+.fretboard .string {
+  stroke: #e3ddd2;
+  stroke-linecap: round;
+}
+.fretboard .string.wound {
+  stroke: #c9b48d;
+}
+.fretboard .string.inactive,
+.fretboard .string-label.inactive {
+  opacity: 0.3;
+}
+.fretboard .string-label {
+  fill: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+}
+.fretboard .fret-number {
+  fill: #7d7468;
+  font-size: 12px;
+}
+.fretboard .fret-number.strong {
+  fill: var(--muted);
+  font-weight: 700;
+}
+.fretboard .cell {
+  fill: transparent;
+  cursor: pointer;
+}
+@media (hover: hover) {
+  .fretboard .cell:hover {
+    fill: #ffffff1c;
+  }
+}
+.fretboard .kbd-cursor {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.5;
+  stroke-dasharray: 5 3;
+  pointer-events: none;
+}
+.fretboard .mark {
+  pointer-events: none;
+}
+.fretboard .mark text {
+  font-size: 13px;
+  font-weight: 700;
+  fill: #15120f;
+}
+.fretboard .mark text.small {
+  font-size: 10px;
+}
+.fretboard .mark circle {
+  stroke: #15120f;
+  stroke-width: 1.5;
+}
+.fretboard .mark-target circle {
+  fill: var(--accent);
+}
+.fretboard .mark-target .pulse {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  animation: pulse 1.4s ease-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+@keyframes pulse {
+  from {
+    opacity: 0.9;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.35);
+  }
+}
+.fretboard .mark-root circle {
+  fill: #f08a4b;
+}
+.fretboard .mark-note circle {
+  fill: #d8d2c6;
+}
+.fretboard .mark-selected circle {
+  fill: var(--info);
+}
+.fretboard .mark-correct circle {
+  fill: var(--ok);
+}
+.fretboard .mark-wrong circle {
+  fill: var(--bad);
+}
+.fretboard .mark-hint circle {
+  fill: #15120fcc;
+  stroke: var(--ok);
+  stroke-width: 2;
+  stroke-dasharray: 4 3;
+}
+.fretboard .mark-hint text {
+  fill: var(--ok);
+}
+.fretboard .mark .sym-bg {
+  fill: #15120f;
+  stroke: none;
+}
+.fretboard .mark .sym {
+  font-size: 10px;
+  fill: #fff;
+}
+.fretboard .mark-correct .sym {
+  fill: var(--ok);
+}
+.fretboard .mark-wrong .sym {
+  fill: var(--bad);
+}
+.rotate-hint {
+  display: none;
+  font-size: 0.85rem;
+}
+@media (orientation: portrait) and (max-width: 600px) {
+  .rotate-hint {
+    display: block;
+  }
+}
+.answer-label {
+  display: block;
+}
+.answer-sub {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 400;
+  color: var(--muted);
+  line-height: 1.15;
+}
+@media (max-width: 640px) {
+  .answer-sub {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .runner-head .muted,
+  .btn .btn-label {
+    display: none;
+  }
+  .tuning-pill {
+    display: none;
+  }
+  .app-header {
+    gap: 0.5rem;
+    padding: 0.4rem 0.6rem;
+  }
+  main {
+    padding: 0.6rem;
+  }
+}
+.interval-board {
+  max-width: 720px;
+}
+.hint-line {
+  margin: 0;
+  align-self: center;
+}
