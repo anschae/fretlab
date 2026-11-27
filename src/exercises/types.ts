@@ -48,6 +48,10 @@ export interface AudioPort {
   /** returns the total length in seconds */
   playSequence(midis: readonly Midi[], gap: number, duration?: number): number;
   stop(): void;
+  /** Audio clock in seconds (0 before unlock) — for look-ahead scheduling. */
+  now(): number;
+  /** Metronome click at an absolute audio-clock time. */
+  click(time: number, accent?: boolean): void;
 }
 
 /** Keyboard bindings that live only as long as the current question. */
@@ -150,6 +154,11 @@ export interface ToolContext {
   settings: GlobalSettings;
   names: NoteNamer;
   audio: AudioPort;
+  /** Unlocks audio from a click handler; resolves true once sound can play. */
+  unlockAudio(): Promise<boolean>;
+  /** The tool's own persisted state (settings, progress), merged with defaults. */
+  load<S>(defaults: S): S;
+  save<S>(value: S): void;
 }
 
 export interface Tool {

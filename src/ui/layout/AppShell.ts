@@ -154,7 +154,20 @@ export class AppShell {
     if (m.kind === "tool") {
       const box = h("div", { class: "page tool" });
       this.main.append(box);
-      const stop = m.render(box, { t: this.app.t, tuning: this.app.tuning, settings: this.app.settings, names: this.app.names(), audio: this.app.audioPort() });
+      const app = this.app;
+      const stop = m.render(box, {
+        t: app.t,
+        tuning: app.tuning,
+        settings: app.settings,
+        names: app.names(),
+        audio: app.audioPort(),
+        unlockAudio: async () => {
+          await app.audio.unlock();
+          return app.audio.ready();
+        },
+        load: (defaults) => app.exerciseSettings(m.id, defaults),
+        save: (value) => app.setExerciseSettings(m.id, value),
+      });
       return () => {
         stop();
         box.remove();

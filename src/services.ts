@@ -152,6 +152,8 @@ export class Services {
       playChord: (ms, delay = 0, duration = dur * 1.5, strum = 0.025) => engine.playChord(ms, delay, duration, { strum }),
       playSequence: (ms, gap, duration = dur) => engine.playSequence(ms, gap, duration),
       stop: () => engine.stopAll(),
+      now: () => engine.now(),
+      click: (time, accent = false) => engine.playClick(time, accent),
     };
   }
 

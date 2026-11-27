@@ -130,6 +130,26 @@ export class AudioEngine {
     return midis.length * gap;
   }
 
+  /**
+   * Metronome click at an absolute AudioContext time (see `Scheduler`).
+   * A short pitched blip straight into the master bus; accents are higher.
+   */
+  playClick(time: number, accent = false): void {
+    if (this.state !== "running" || !this.ctx || !this.master) return;
+    const t = Math.max(time, this.ctx.currentTime);
+    const osc = this.ctx.createOscillator();
+    const env = this.ctx.createGain();
+    osc.type = "square";
+    osc.frequency.value = accent ? 1760 : 1175;
+    env.gain.setValueAtTime(0.0001, t);
+    env.gain.exponentialRampToValueAtTime(accent ? 0.35 : 0.22, t + 0.002);
+    env.gain.exponentialRampToValueAtTime(0.0001, t + 0.045);
+    osc.connect(env).connect(this.master);
+    osc.start(t);
+    osc.stop(t + 0.06);
+    osc.onended = () => env.disconnect();
+  }
+
   stopAll(): void {
     this.instrument?.stopAll();
   }
