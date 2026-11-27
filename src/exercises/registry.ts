@@ -5,11 +5,13 @@ import type { AppModule } from "./types";
 import { intervalEar } from "./interval-ear";
 import { fretboardNameNote } from "./fretboard-name-note";
 import { fretboardFindNote } from "./fretboard-find-note";
+import { noteDrill } from "../tools/note-drill";
 
 export const MODULES: readonly AppModule[] = [
   intervalEar,
   fretboardNameNote,
   fretboardFindNote,
+  noteDrill,
 ];
 
 export function findModule(id: string): AppModule | undefined {
